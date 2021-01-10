@@ -1,8 +1,9 @@
 import React from 'react';
 import Particles from 'react-particles-js';
 import AnswerSection from './components/AnswerSection/AnswerSection.component';
-import particlesOptions from './particles.json';
+import Settings from './components/SettingsSection/Settings.component';
 
+import particlesOptions from './particles.json';
 import './App.css';
 
 export default class App extends React.Component {
@@ -11,19 +12,37 @@ export default class App extends React.Component {
 
     this.state = {
       synth: window.speechSynthesis,
-      currentNumber: this.generateNumber(),
-      score: 0
+      currentNumber: 100,
+      score: 0,
+      minimum: 0,
+      maximum: 1000,
+      speed: 1.0
     }
   }
 
+  componentDidMount = () => {
+    this.generateNumber();
+    console.log("did mount")
+  }
+
   generateNumber = () => {
-    return Math.trunc(Math.random() * 1000);
+    let {minimum, maximum} = this.state;
+    
+    minimum = Math.floor(minimum);
+    maximum = Math.ceil(maximum);
+
+    let finalNumber = Math.floor(Math.random() * ((maximum + 1) - minimum) + minimum);
+
+    this.setState({currentNumber: finalNumber})
   }
 
   utterNumber = () => {
-    this.generateNumber();
+    let {speed} = this.state;
+
     let numberUtterance = new SpeechSynthesisUtterance(this.state.currentNumber);
     
+    numberUtterance.rate = Math.max(0.1, Math.min(3.0, speed));
+
     this.state.synth.speak(numberUtterance);
   }
 
@@ -31,9 +50,15 @@ export default class App extends React.Component {
     if(parseInt(input) === this.state.currentNumber)
     {
       let currentScore = this.state.score;
-      this.setState({score: currentScore + 1, 
-                    currentNumber: this.generateNumber()});
+      this.setState({score: currentScore + 1});
+      this.generateNumber();
     }
+  }
+
+  handleSettingsChange = (e) => {
+    const { value, name } = e.target;
+
+    this.setState({ [name]: parseFloat(value) });
   }
 
   render = () => {
@@ -46,6 +71,7 @@ export default class App extends React.Component {
         <div className="playArea">
           <h2>{this.state.score}</h2>
           <AnswerSection speak={() => this.utterNumber()} validate={(input) => this.validateNumber(input)} />
+          <Settings handleSettingsChange={(e) => this.handleSettingsChange(e)}/>
         </div>
       </div>
     );

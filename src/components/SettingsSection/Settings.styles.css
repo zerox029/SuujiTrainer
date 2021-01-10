@@ -1,0 +1,39 @@
+.settings {
+  padding: 10px;
+  background-color: rgb(253, 214, 221);
+  -webkit-box-shadow: inset 0px 3px 5px 0px rgba(0,0,0,0.50);
+  -moz-box-shadow: inset 0px 3px 5px 0px rgba(0,0,0,0.50);
+  box-shadow: inset 0px 3px 5px 0px rgba(0,0,0,0.50);
+  display: flex;
+  flex-direction: row;
+}
+
+.settings > div {
+  width: 50%;
+}
+
+.speed, .bounds {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bounds > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.bounds input {
+  width: 3rem;
+}
+
+.speed input {
+  width: 50%;
+}
+
+.settingName {
+  margin-top: 0;
+  text-decoration: underline;
+}
