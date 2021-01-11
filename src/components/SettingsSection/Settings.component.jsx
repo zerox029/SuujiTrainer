@@ -33,15 +33,6 @@ export default class Settings extends Component {
               })
             }} defaultChecked/>
           </div>
-          <div>
-            <label htmlFor="gameType">Game Type</label>
-            <select name="gameType" id="gameType">
-              <option value="integers">Integers</option>
-              <option value="decimals">Decimals</option>
-              <option value="years">Years</option>
-              <option value="mixed">Mixed</option>
-            </select>
-          </div>
         </div>
       </div>
     )

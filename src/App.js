@@ -17,7 +17,8 @@ export default class App extends React.Component {
       minimum: 0,
       maximum: 1000,
       speed: 1.0,
-      autoplay: true
+      autoplay: true,
+      gameType: "integer"
     }
   }
 
@@ -52,6 +53,8 @@ export default class App extends React.Component {
   handleSettingsChange = (e) => {
     const { value, name } = e.target;
 
+    console.log("de");
+    
     this.setState({ [name]: value });
   }
 
