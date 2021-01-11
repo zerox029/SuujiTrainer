@@ -21,8 +21,16 @@ export default class AnswerSection extends React.Component {
     if(parseInt(input) === this.props.currentNumber)
     {
       this.props.onValidAnswer();
-      setTimeout(() => this.setState({currentGuess: ""}), 100);
+
+      document.querySelector(".answerSection").classList.add("correctAnswer");
+      
+      setTimeout(this.correctAnswerVisualChanges, 100);
     }
+  }
+
+  correctAnswerVisualChanges = () => {
+    document.querySelector(".answerSection").classList.remove("correctAnswer");
+    this.setState({currentGuess: ""})
   }
 
   render() {

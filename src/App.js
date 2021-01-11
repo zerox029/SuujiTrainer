@@ -67,7 +67,7 @@ export default class App extends React.Component {
         <h1 className="title">数字トレーナー</h1>
 
         <div className="playArea">
-          <h2>{this.state.score} points</h2>
+          <h2>{this.state.score} point{this.state.score !== 1 ? "s" : ""}</h2>
           <AnswerSection 
             speak={() => this.utterNumber()} 
             validate={(input) => this.validateNumber(input)}

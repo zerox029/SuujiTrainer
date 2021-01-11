@@ -8,7 +8,16 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
+}
+
+.answerSection.correctAnswer {
+  background-color: rgb(217, 255, 219);
+}
+
+.answerSection:not(.correctAnswer) {
+  background-color: rgb(255, 255, 255);
+  transition: all .1s linear
 }
 
 input {
