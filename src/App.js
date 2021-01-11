@@ -27,7 +27,7 @@ export default class App extends React.Component {
 
     let score = localStorage.getItem("score") ?? 0;
     let minimum = localStorage.getItem("minimum") ?? 0;
-    let maximum = localStorage.getItem("maximum") ?? 0;
+    let maximum = localStorage.getItem("maximum") ?? 1000;
     let speed = localStorage.getItem("speed") ?? 1;
     let autoplay = localStorage.getItem("autoplay") ?? true;
 
@@ -104,9 +104,9 @@ export default class App extends React.Component {
   getSettingsObject = () => {
     return {
       minimum: localStorage.getItem("minimum") ?? 0,
-      maximum: localStorage.getItem("maximum") ?? 0,
-      speed: localStorage.getItem("speed") ?? 0,
-      autoplay: localStorage.getItem("autoplay") ?? true
+      maximum: localStorage.getItem("maximum") ?? 1000,
+      speed: localStorage.getItem("speed") ?? 1,
+      autoplay: localStorage.getItem("autoplay") ?? "true"
     }
   }
 
