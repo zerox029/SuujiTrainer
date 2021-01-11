@@ -64,6 +64,20 @@ export default class App extends React.Component {
     this.generateNumber();
   }
 
+  saveData = () => {
+    
+  }
+
+  reset = () => {
+    this.setState({
+      minimum: 0,
+      maximum: 1000,
+      speed: 1,
+      autoplay: true,
+      score: 0
+    })
+  }
+
   render = () => {
     return (
       <div className="App">
@@ -80,7 +94,8 @@ export default class App extends React.Component {
             onValidAnswer={this.handleValidAnswer} />
           <Settings 
             handleSettingsChange={(e) => this.handleSettingsChange(e)} 
-            visible={this.state.settingsVisible} />
+            visible={this.state.settingsVisible}
+            reset={this.reset} />
           <p className="credits">© Étienne Plante 2021</p>
         </div>
       </div>

@@ -3,6 +3,15 @@ import React, { Component } from 'react';
 import './Settings.styles.css';
 
 export default class Settings extends Component {
+  resetSettings = () => {
+    document.querySelector("#minimum").value = "0";
+    document.querySelector("#maximum").value = "1000";
+    document.querySelector("#speed").value = "1";
+    document.querySelector("#autoplay").checked = "true";
+
+    this.props.reset();
+  }
+
   render() {
     return (
       <div className="settings">
@@ -33,6 +42,7 @@ export default class Settings extends Component {
               })
             }} defaultChecked/>
           </div>
+          <input type="button" value="Reset" className="reset" onClick={this.resetSettings} />
         </div>
       </div>
     )
