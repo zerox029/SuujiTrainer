@@ -64,10 +64,10 @@ export default class App extends React.Component {
       <div className="App">
         <Particles options={particlesOptions}/>
         
-        <h1 className="title">数字トレーナー</h1>
+        <h1 className="title jpText">数字トレーナー</h1>
 
         <div className="playArea">
-          <h2>{this.state.score} point{this.state.score !== 1 ? "s" : ""}</h2>
+          <h2 className="jpText">{this.state.score} 点</h2>
           <AnswerSection 
             speak={() => this.utterNumber()} 
             validate={(input) => this.validateNumber(input)}
@@ -75,10 +75,7 @@ export default class App extends React.Component {
             onValidAnswer={this.handleValidAnswer} />
           <Settings 
             handleSettingsChange={(e) => this.handleSettingsChange(e)} 
-            visible={this.state.settingsVisible} 
-            onMouseEnter={() => this.setState({settingsVisible: true})} 
-            onMouseLeave={() => this.setState({settingsVisible: false})}  />
-          <div className="settingsToggle" onMouseEnter={() => this.setState({settingsVisible: true})} onMouseLeave={() => this.setState({settingsVisible: false})}></div>
+            visible={this.state.settingsVisible} />
         </div>
       </div>
     );
