@@ -28,7 +28,7 @@ export default class App extends React.Component {
     let score = parseInt(localStorage.getItem("score")) ?? 0;
     let minimum = parseFloat(localStorage.getItem("minimum")) ?? 0;
     let maximum = parseFloat(localStorage.getItem("maximum")) ?? 0;
-    let speed = parseFloat(localStorage.getItem("speed")) ?? 0;
+    let speed = parseInt(localStorage.getItem("speed")) ?? 0;
     let autoplay = localStorage.getItem("autoplay") ?? true;
 
     this.setState({
