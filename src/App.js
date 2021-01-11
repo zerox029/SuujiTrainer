@@ -24,7 +24,20 @@ export default class App extends React.Component {
 
   componentDidMount = () => {
     this.generateNumber();
-    console.log("did mount")
+
+    let score = localStorage.getItem("score") ?? 0;
+    let minimum = localStorage.getItem("minimum") ?? 0;
+    let maximum = localStorage.getItem("maximum") ?? 0;
+    let speed = localStorage.getItem("speed") ?? 0;
+    let autoplay = localStorage.getItem("autoplay") ?? true;
+
+    this.setState({
+      score,
+      minimum,
+      maximum,
+      speed,
+      autoplay
+    });
   }
 
   generateNumber = () => {
@@ -52,20 +65,28 @@ export default class App extends React.Component {
 
   handleSettingsChange = (e) => {
     const { value, name } = e.target;
-
-    console.log("de");
     
     this.setState({ [name]: value });
+    this.saveData(name, value);
   }
 
   handleValidAnswer = () => {
     let currentScore = this.state.score;
     this.setState({score: currentScore + 1});
+    this.saveData("score", currentScore + 1);
     this.generateNumber();
   }
 
-  saveData = () => {
-    
+  saveData = (name, value) => {
+    localStorage.setItem(name, value);
+  }
+
+  resetStorage = () => {
+    this.saveData("minimum", 0);
+    this.saveData("maximum", 1000);
+    this.saveData("speed", 1);
+    this.saveData("autoplay", true);
+    this.saveData("score", 0);
   }
 
   reset = () => {
@@ -76,6 +97,17 @@ export default class App extends React.Component {
       autoplay: true,
       score: 0
     })
+
+    this.resetStorage();
+  }
+
+  getSettingsObject = () => {
+    return {
+      minimum: localStorage.getItem("minimum") ?? 0,
+      maximum: localStorage.getItem("maximum") ?? 0,
+      speed: localStorage.getItem("speed") ?? 0,
+      autoplay: localStorage.getItem("autoplay") ?? true
+    }
   }
 
   render = () => {
@@ -86,7 +118,7 @@ export default class App extends React.Component {
         <h1 className="title jpText">数字トレーナー</h1>
 
         <div className="playArea">
-          <h2 className="jpText">{this.state.score} 点</h2>
+          <h2 className="jpText">{this.state.score}点</h2>
           <AnswerSection 
             speak={() => this.utterNumber()} 
             validate={(input) => this.validateNumber(input)}
@@ -94,9 +126,9 @@ export default class App extends React.Component {
             onValidAnswer={this.handleValidAnswer} />
           <Settings 
             handleSettingsChange={(e) => this.handleSettingsChange(e)} 
-            visible={this.state.settingsVisible}
+            baseSettings={this.getSettingsObject()}
             reset={this.reset} />
-          <p className="credits">© Étienne Plante 2021</p>
+          <p className="credits">Étienne Plante - 2021</p>
         </div>
       </div>
     );

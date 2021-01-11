@@ -3,11 +3,18 @@ import React, { Component } from 'react';
 import './Settings.styles.css';
 
 export default class Settings extends Component {
+  componentDidMount = () => {
+    document.querySelector("#minimum").value = this.props.baseSettings.minimum;
+    document.querySelector("#maximum").value = this.props.baseSettings.maximum;
+    document.querySelector("#speed").value = this.props.baseSettings.speed;
+    document.querySelector("#autoplay").checked = this.props.baseSettings.autoplay === "true";
+  }
+
   resetSettings = () => {
     document.querySelector("#minimum").value = "0";
     document.querySelector("#maximum").value = "1000";
     document.querySelector("#speed").value = "1";
-    document.querySelector("#autoplay").checked = "true";
+    document.querySelector("#autoplay").checked = true;
 
     this.props.reset();
   }
