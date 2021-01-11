@@ -16,7 +16,8 @@ export default class App extends React.Component {
       score: 0,
       minimum: 0,
       maximum: 1000,
-      speed: 1.0
+      speed: 1.0,
+      settingsVisible: false
     }
   }
 
@@ -69,9 +70,16 @@ export default class App extends React.Component {
         <h1 className="title">数字トレーナー</h1>
 
         <div className="playArea">
-          <h2>{this.state.score}</h2>
-          <AnswerSection speak={() => this.utterNumber()} validate={(input) => this.validateNumber(input)} />
-          <Settings handleSettingsChange={(e) => this.handleSettingsChange(e)}/>
+          <h2>{this.state.score} points</h2>
+          <AnswerSection 
+            speak={() => this.utterNumber()} 
+            validate={(input) => this.validateNumber(input)} />
+          <Settings 
+            handleSettingsChange={(e) => this.handleSettingsChange(e)} 
+            visible={this.state.settingsVisible} 
+            onMouseEnter={() => this.setState({settingsVisible: true})} 
+            onMouseLeave={() => this.setState({settingsVisible: false})}  />
+          <div className="settingsToggle" onMouseEnter={() => this.setState({settingsVisible: true})} onMouseLeave={() => this.setState({settingsVisible: false})}></div>
         </div>
       </div>
     );

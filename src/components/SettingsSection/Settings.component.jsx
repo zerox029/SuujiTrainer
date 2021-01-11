@@ -5,7 +5,7 @@ import './Settings.styles.css';
 export default class Settings extends Component {
   render() {
     return (
-      <div className="settings">
+      <div className={`settings ${this.props.visible ? "" : "hidden"}`} onMouseEnter={() => this.props.onMouseEnter()} onMouseLeave={() => this.props.onMouseLeave()}>
         <div className="bounds">
           <p className="settingName">Bounds</p>
           <div>

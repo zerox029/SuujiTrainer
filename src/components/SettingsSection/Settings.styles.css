@@ -37,3 +37,13 @@
   margin-top: 0;
   text-decoration: underline;
 }
+
+.settings.hidden {
+  margin-bottom: -150px;
+  transition: all .5s linear
+}
+
+.settings:not(.hidden) {
+  margin-bottom: 0;
+  transition: all .3s linear
+}
