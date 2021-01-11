@@ -47,19 +47,16 @@ export default class App extends React.Component {
     this.state.synth.speak(numberUtterance);
   }
 
-  validateNumber = (input) => {
-    if(parseInt(input) === this.state.currentNumber)
-    {
-      let currentScore = this.state.score;
-      this.setState({score: currentScore + 1});
-      this.generateNumber();
-    }
-  }
-
   handleSettingsChange = (e) => {
     const { value, name } = e.target;
 
     this.setState({ [name]: parseFloat(value) });
+  }
+
+  handleValidAnswer = () => {
+    let currentScore = this.state.score;
+    this.setState({score: currentScore + 1});
+    this.generateNumber();
   }
 
   render = () => {
@@ -73,7 +70,9 @@ export default class App extends React.Component {
           <h2>{this.state.score} points</h2>
           <AnswerSection 
             speak={() => this.utterNumber()} 
-            validate={(input) => this.validateNumber(input)} />
+            validate={(input) => this.validateNumber(input)}
+            currentNumber={this.state.currentNumber}
+            onValidAnswer={this.handleValidAnswer} />
           <Settings 
             handleSettingsChange={(e) => this.handleSettingsChange(e)} 
             visible={this.state.settingsVisible} 
