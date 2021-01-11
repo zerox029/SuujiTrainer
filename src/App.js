@@ -17,7 +17,7 @@ export default class App extends React.Component {
       minimum: 0,
       maximum: 1000,
       speed: 1.0,
-      settingsVisible: false
+      autoplay: true
     }
   }
 
@@ -29,12 +29,14 @@ export default class App extends React.Component {
   generateNumber = () => {
     let {minimum, maximum} = this.state;
     
-    minimum = Math.floor(minimum);
-    maximum = Math.ceil(maximum);
+    minimum = Math.floor(parseFloat(minimum));
+    maximum = Math.ceil(parseFloat(maximum));
 
     let finalNumber = Math.floor(Math.random() * ((maximum + 1) - minimum) + minimum);
 
-    this.setState({currentNumber: finalNumber})
+    this.setState({currentNumber: finalNumber}, () => {
+      if(this.state.autoplay) this.utterNumber();
+    })
   }
 
   utterNumber = () => {
@@ -42,7 +44,7 @@ export default class App extends React.Component {
 
     let numberUtterance = new SpeechSynthesisUtterance(this.state.currentNumber);
     
-    numberUtterance.rate = Math.max(0.1, Math.min(3.0, speed));
+    numberUtterance.rate = Math.max(0.1, Math.min(3.0, parseFloat(speed)));
 
     this.state.synth.speak(numberUtterance);
   }
@@ -50,7 +52,7 @@ export default class App extends React.Component {
   handleSettingsChange = (e) => {
     const { value, name } = e.target;
 
-    this.setState({ [name]: parseFloat(value) });
+    this.setState({ [name]: value });
   }
 
   handleValidAnswer = () => {
@@ -76,6 +78,7 @@ export default class App extends React.Component {
           <Settings 
             handleSettingsChange={(e) => this.handleSettingsChange(e)} 
             visible={this.state.settingsVisible} />
+          <p className="credits">© Étienne Plante 2021</p>
         </div>
       </div>
     );

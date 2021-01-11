@@ -25,7 +25,13 @@ export default class Settings extends Component {
           <p className="settingName">Miscelaneous</p>
           <div>
             <label htmlFor="autoplay">Autoplay</label>
-            <input type="checkbox" name="autoplay" id="autoplay" onChange={(e) => this.props.handleSettingsChange(e)} defaultChecked/>
+            <input type="checkbox" name="autoplay" id="autoplay" onChange={(e) => { this.props.handleSettingsChange({
+                target: {
+                  name: e.target.name,
+                  value: e.target.checked
+                }
+              })
+            }} defaultChecked/>
           </div>
           <div>
             <label htmlFor="gameType">Game Type</label>
