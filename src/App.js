@@ -57,6 +57,7 @@ export default class App extends React.Component {
     let {speed} = this.state;
 
     let numberUtterance = new SpeechSynthesisUtterance(this.state.currentNumber);
+    numberUtterance.lang = 'ja-JP'
     
     numberUtterance.rate = Math.max(0.1, Math.min(3.0, parseFloat(speed)));
 
