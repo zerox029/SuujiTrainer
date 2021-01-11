@@ -25,10 +25,10 @@ export default class App extends React.Component {
   componentDidMount = () => {
     this.generateNumber();
 
-    let score = localStorage.getItem("score") ?? 0;
-    let minimum = localStorage.getItem("minimum") ?? 0;
-    let maximum = localStorage.getItem("maximum") ?? 0;
-    let speed = localStorage.getItem("speed") ?? 0;
+    let score = parseInt(localStorage.getItem("score")) ?? 0;
+    let minimum = parseFloat(localStorage.getItem("minimum")) ?? 0;
+    let maximum = parseFloat(localStorage.getItem("maximum")) ?? 0;
+    let speed = parseFloat(localStorage.getItem("speed")) ?? 0;
     let autoplay = localStorage.getItem("autoplay") ?? true;
 
     this.setState({
